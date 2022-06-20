@@ -9,6 +9,8 @@ require __DIR__ . '/vendor/autoload.php';
 
 use FlickerLeap\Diamond;
 use FlickerLeap\Rectangle;
+use FlickerLeap\Square;
+use Httpful\Request;
 
 ?>
 <!DOCTYPE html>
@@ -30,30 +32,44 @@ use FlickerLeap\Rectangle;
         <h2>Output a square</h2>
 
         <?php
-            // implement the square class here
+            $square = new Square(8);
+            $square->displayName();
+            $square->newLine();
+            $square->draw();
         ?>
 
         <h2>Output a diamond</h2>
 
         <?php
-            // output your diamond here
+            $rectangle = new Diamond(8);
+            $rectangle->displayName();
+            $rectangle->newLine();
+            $rectangle->draw();
         ?>
 
         <h2>Output your rectangle</h2>
 
         <?php
-            // output your working rectangle here
+            $rectangle = new Rectangle(8);
+            $rectangle->displayName();
+            $rectangle->newLine();
+            $rectangle->draw();
         ?>
 
         <h2>Output the result of the API</h2>
 
         <?php
-            // Use the Httpful client to output the API results here.
+            $url = 'http://pokeapi.co/api/v2/pokemon/mewtwo/';
+            $response = Request::get($url)->followRedirects()->send();
+            echo('name=>'. $response->body->name . '<br />');
+            echo('weight=>'. $response->body->weight .'<br />');
+            echo('height=>'. $response->body->height);
         ?>
 
         <h2>Recommendations</h2>
 
-        <p><!-- Let us know how we can improve this test here --></p>
-
+        <p>
+            Include some more questions regarding Object Oriented Programming . Need more questions covering concepts of php like static functions traits and about usage of various libraries
+        </p>
     </body>
 </html>
